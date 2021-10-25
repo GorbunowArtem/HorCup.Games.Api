@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorCup.Games", "src\HorCup.Games\HorCup.Games.csproj", "{CFF0CD4A-E937-4880-BAFE-223673E32629}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorCup.Games.Tests", "tests\HorCup.Games.Tests\HorCup.Games.Tests.csproj", "{4A5E1F12-18E3-4F0D-84DD-DE72F91A64A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "docker-compose", "docker-compose.dcproj", "{DBEFE47D-0BFE-4BAF-AA30-7AFD2566E22A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CFF0CD4A-E937-4880-BAFE-223673E32629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFF0CD4A-E937-4880-BAFE-223673E32629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFF0CD4A-E937-4880-BAFE-223673E32629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFF0CD4A-E937-4880-BAFE-223673E32629}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A5E1F12-18E3-4F0D-84DD-DE72F91A64A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A5E1F12-18E3-4F0D-84DD-DE72F91A64A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A5E1F12-18E3-4F0D-84DD-DE72F91A64A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A5E1F12-18E3-4F0D-84DD-DE72F91A64A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBEFE47D-0BFE-4BAF-AA30-7AFD2566E22A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBEFE47D-0BFE-4BAF-AA30-7AFD2566E22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBEFE47D-0BFE-4BAF-AA30-7AFD2566E22A}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBEFE47D-0BFE-4BAF-AA30-7AFD2566E22A}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+EndGlobal

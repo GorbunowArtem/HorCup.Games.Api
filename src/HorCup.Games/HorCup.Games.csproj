@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <DebugType>portable</DebugType>
+        <PreserveCompilationContext>true</PreserveCompilationContext>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <GenerateErrorForMissingTargetingPacks>false</GenerateErrorForMissingTargetingPacks>
+        <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+        <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="10.1.1" />
+        <PackageReference Include="CqrsLite" Version="1.33.0" />
+        <PackageReference Include="FluentValidation" Version="10.1.0" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="10.1.0" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.1.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+        <PackageReference Include="MongoDB.Driver" Version="2.13.2" />
+        <PackageReference Include="NEST" Version="7.15.1" />
+        <PackageReference Include="NEventStore" Version="8.0.0" />
+        <PackageReference Include="NEventStore.Persistence.Sql" Version="8.0.0" />
+        <PackageReference Include="NEventStore.PollingClient" Version="8.0.0" />
+        <PackageReference Include="NEventStore.Serialization.Json" Version="8.0.0" />
+        <PackageReference Include="Scrutor.AspNetCore" Version="3.3.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.2.3" />
+        <PackageReference Include="System.Reflection.TypeExtensions" Version="4.7.0" />
+        <PackageReference Include="TupleExtensions.VictorGavrish" Version="1.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Services" />
+    </ItemGroup>
+</Project>

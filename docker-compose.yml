@@ -1,0 +1,14 @@
+version : "3.4"
+
+services :
+  sql-server :
+    image : mcr.microsoft.com/mssql/server:2019-latest
+
+  mongodb :
+    image : mongo
+#
+#  rabbitmq :
+#    image : masstransit/rabbitmq
+#    
+  elasticsearch :
+    image : elasticsearch:7.14.2
