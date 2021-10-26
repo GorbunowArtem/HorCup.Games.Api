@@ -30,7 +30,6 @@ namespace HorCup.Games
 			services.AddHealthChecks();
 
 			services.AddControllers();
-			
 		}
 
 		public void Configure(

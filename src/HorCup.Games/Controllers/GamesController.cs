@@ -58,7 +58,7 @@ namespace HorCup.Games.Controllers
 			CancellationToken cancellationToken)
 		{
 			var id = Guid.NewGuid();
-			var command = new CreateGameCommand(id,
+			var command = new AddGameCommand(id,
 				request.Title,
 				request.MinPlayers,
 				request.MaxPlayers,

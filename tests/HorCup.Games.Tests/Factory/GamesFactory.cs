@@ -1,17 +1,16 @@
 using System;
 using HorCup.Games.Models;
-using HorCup.Tests.Base;
 
 namespace HorCup.Games.Tests.Factory
 {
 	public class GamesFactory
 	{
-		public readonly Guid NotExistingGameId = 13252323.Guid();
-		public readonly Guid CreatedGameId = 1.Guid();
-		public readonly Guid Game1Id = 11.Guid();
-		public readonly Guid Game2Id = 2.Guid();
-		public readonly Guid Game3Id = 3.Guid();
-		public readonly Guid Game4Id = 4.Guid();
+		public readonly Guid NotExistingGameId =  Guid.NewGuid();
+		public readonly Guid CreatedGameId = Guid.NewGuid();
+		public readonly Guid Game1Id = Guid.NewGuid();
+		public readonly Guid Game2Id = Guid.NewGuid();
+		public readonly Guid Game3Id = Guid.NewGuid();
+		public readonly Guid Game4Id = Guid.NewGuid();
 		
 		public const string CreatedGameTitle = "Created Game";
 		public const string Game1Title = "Game 1";
