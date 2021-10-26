@@ -19,7 +19,7 @@ namespace HorCup.Games.Commands
 
 		public async Task Handle(AddGameCommand command, CancellationToken token = new())
 		{
-			var game = new GameAggregate(command.Id);
+			var game = new Game(command.Id);
 
 			game.SetTitle(command.Title);
 			game.SetPlayersCount(command.MinPlayers, command.MaxPlayers);
@@ -31,7 +31,7 @@ namespace HorCup.Games.Commands
 
 		public async Task Handle(EditGameCommand command, CancellationToken token = new())
 		{
-			var game = await _session.Get<GameAggregate>(command.Id, cancellationToken: token);
+			var game = await _session.Get<Game>(command.Id, cancellationToken: token);
 			
 			game.SetTitle(command.Title);
 			game.SetPlayersCount(command.MinPlayers, command.MaxPlayers);
@@ -42,7 +42,7 @@ namespace HorCup.Games.Commands
 
 		public async Task Handle(DeleteGameCommand command, CancellationToken token = new())
 		{
-			var game = await _session.Get<GameAggregate>(command.Id, cancellationToken: token);
+			var game = await _session.Get<Game>(command.Id, cancellationToken: token);
 
 			game.Delete();
 			

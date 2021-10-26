@@ -1,5 +1,5 @@
 using System;
-using HorCup.Games.Models;
+using HorCup.Games.ViewModels;
 
 namespace HorCup.Games.Tests.Factory
 {
@@ -32,7 +32,7 @@ namespace HorCup.Games.Tests.Factory
 		public const int Game3MaxPlayers = 6;
 		public const int Game4MaxPlayers = 8;
 
-		public Game[] Games => new Game[]
+		public GameViewModel[] Games => new GameViewModel[]
 		{
 			new()
 			{
