@@ -22,7 +22,7 @@ namespace HorCup.Games.Tests.Validators
 		[InlineData("More symbols than described in GamesConstraints cla", "The length of 'Title' must be 50 characters or fewer. You entered 51 characters.")]
 		public void AddGameCommandValidator_TitleInvalid_ValidationErrorThrown(string title, string errorMessage)
 		{
-			var model = _fixture.Build<AddGameCommand>()
+			var model = _fixture.Build<CreateGameCommand>()
 				.With(t => t.Title, title)
 				.Create();
 			
@@ -38,7 +38,7 @@ namespace HorCup.Games.Tests.Validators
 		[InlineData("Title with maximum available length 12345678910112")]
 		public void AddGameCommandValidator_TitleValid_ValidationPassed(string title)
 		{
-			var model = _fixture.Build<AddGameCommand>()
+			var model = _fixture.Build<CreateGameCommand>()
 				.With(t => t.Title, title)
 				.Create();
 
@@ -53,7 +53,7 @@ namespace HorCup.Games.Tests.Validators
 		[InlineData(1, 2, "'Max Players' must be greater than or equal to '2'.")]
 		public void AddGameValidator_MaxPlayersCountInvalid_ValidationErrorThrown(int maxPlayers, int minPlayers, string errorMessage)
 		{
-			var model = _fixture.Build<AddGameCommand>()
+			var model = _fixture.Build<CreateGameCommand>()
 				.With(t => t.MinPlayers, minPlayers)
 				.With(t => t.MaxPlayers, maxPlayers)
 				.Create();
@@ -70,7 +70,7 @@ namespace HorCup.Games.Tests.Validators
 		[InlineData(10, 10)]
 		public void AddGameValidator_MaxPlayersCountValid_ValidationPassed(int maxPlayers, int minPlayers)
 		{
-			var model = _fixture.Build<AddGameCommand>()
+			var model = _fixture.Build<CreateGameCommand>()
 				.With(t => t.MinPlayers, minPlayers)
 				.With(t => t.MaxPlayers, maxPlayers)
 				.Create();
@@ -86,7 +86,7 @@ namespace HorCup.Games.Tests.Validators
 		[InlineData(2, 1, "'Min Players' must be less than or equal to '1'.")]
 		public void AddGameValidator_MinPlayersCountInvalid_ValidationErrorThrown(int minPlayers, int maxPlayers, string errorMessage)
 		{
-			var model = _fixture.Build<AddGameCommand>()
+			var model = _fixture.Build<CreateGameCommand>()
 				.With(t => t.MinPlayers, minPlayers)
 				.With(t => t.MaxPlayers, maxPlayers)
 				.Create();
@@ -104,7 +104,7 @@ namespace HorCup.Games.Tests.Validators
 		[InlineData(11, 12)]
 		public void AddGameValidator_MinPlayersCountValid_ValidationPassed(int minPlayers, int maxPlayers)
 		{
-			var model = _fixture.Build<AddGameCommand>()
+			var model = _fixture.Build<CreateGameCommand>()
 				.With(t => t.MinPlayers, minPlayers)
 				.With(t => t.MaxPlayers, maxPlayers)
 				.Create();

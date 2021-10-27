@@ -11,7 +11,7 @@ using Xunit;
 
 namespace HorCup.Games.Tests.Commands
 {
-	public class GameCommandHandlerTests : Specification<Game, GameCommandHandler, AddGameCommand>
+	public class GameCommandHandlerTests : Specification<Game, GameCommandHandler, CreateGameCommand>
 	{
 		private const string Title = "Sometitle";
 		private const string Description = "SomeDescription";
@@ -42,8 +42,8 @@ namespace HorCup.Games.Tests.Commands
 
 		protected override IEnumerable<IEvent> Given() => Enumerable.Empty<IEvent>();
 
-		protected override AddGameCommand When() =>
-			new Fixture().Build<AddGameCommand>()
+		protected override CreateGameCommand When() =>
+			new Fixture().Build<CreateGameCommand>()
 				.With(c => c.Title, Title)
 				.With(c => c.MinPlayers, MinPlayers)
 				.With(c => c.MaxPlayers, MaxPlayers)

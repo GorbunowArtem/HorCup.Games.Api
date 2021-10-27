@@ -11,6 +11,7 @@ using CQRSlite.Routing;
 using HorCup.Games.Commands;
 using HorCup.Games.EventStore;
 using HorCup.Games.Options;
+using HorCup.Games.Services.Rebuild;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -32,6 +33,7 @@ namespace HorCup.Games.Extensions
 			services.AddSingleton<IEventPublisher>(y => y.GetService<Router>());
 			services.AddSingleton<IHandlerRegistrar>(y => y.GetService<Router>());
 			services.AddSingleton<IQueryProcessor>(y => y.GetService<Router>());
+			services.AddScoped<IProjectionRebuildService, ProjectionRebuildService>();
 
 
 			CreateDatabaseIfNotExists(
@@ -46,7 +48,6 @@ namespace HorCup.Games.Extensions
 						.AddDebug()
 						.SetMinimumLevel(LogLevel.Trace);
 				}))
-				// .UsingInMemoryPersistence()
 				.UsingSqlPersistence(new NetStandardConnectionFactory(
 					SqlClientFactory.Instance,
 					configuration.GetSection(SqlDbOptions.SqlDb)[nameof(SqlDbOptions.ConnectionString)]))

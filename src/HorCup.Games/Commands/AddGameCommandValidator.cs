@@ -3,7 +3,7 @@ using HorCup.Games.Models;
 
 namespace HorCup.Games.Commands
 {
-	public class AddGameCommandValidator: AbstractValidator<AddGameCommand>
+	public class AddGameCommandValidator: AbstractValidator<CreateGameCommand>
 	{
 		public AddGameCommandValidator()
 		{

@@ -6,7 +6,7 @@ using HorCup.Games.Models;
 
 namespace HorCup.Games.Commands
 {
-	public class GameCommandHandler : ICancellableCommandHandler<AddGameCommand>,
+	public class GameCommandHandler : ICancellableCommandHandler<CreateGameCommand>,
 		ICancellableCommandHandler<EditGameCommand>,
 		ICancellableCommandHandler<DeleteGameCommand>
 	{
@@ -17,7 +17,7 @@ namespace HorCup.Games.Commands
 			_session = session;
 		}
 
-		public async Task Handle(AddGameCommand command, CancellationToken token = new())
+		public async Task Handle(CreateGameCommand command, CancellationToken token = new())
 		{
 			var game = new Game(command.Id, command.Genre);
 

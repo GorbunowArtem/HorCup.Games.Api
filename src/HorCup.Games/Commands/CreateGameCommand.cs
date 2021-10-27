@@ -3,7 +3,7 @@ using CQRSlite.Commands;
 
 namespace HorCup.Games.Commands
 {
-	public record AddGameCommand(
+	public record CreateGameCommand(
 		Guid Id,
 		string Title,
 		int MinPlayers,
