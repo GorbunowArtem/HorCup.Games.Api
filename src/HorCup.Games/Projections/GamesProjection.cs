@@ -28,7 +28,7 @@ namespace HorCup.Games.Projections
 			_games = client.GetCollection<GameDto>("Games");
 		}
 
-		public Task Handle(GameCreated message, CancellationToken token = new CancellationToken()) =>
+		public Task Handle(GameCreated message, CancellationToken token = new()) =>
 			_games.UpdateOneAsync(Builders<GameDto>.Filter.Eq(g => g.Id, message.Id),
 				Builders<GameDto>.Update
 					.Set(g => g.Id, message.Id)

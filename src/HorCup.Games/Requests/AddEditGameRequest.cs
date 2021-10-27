@@ -1,7 +1,9 @@
 namespace HorCup.Games.Requests
 {
-	public record AddEditGameRequest(string Title,
+	public record AddEditGameRequest(
+		string Title,
 		int MaxPlayers,
 		int MinPlayers,
-		string Description);
+		string Description,
+		string Genre);
 }

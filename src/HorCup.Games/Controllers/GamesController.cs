@@ -62,7 +62,8 @@ namespace HorCup.Games.Controllers
 				request.Title,
 				request.MinPlayers,
 				request.MaxPlayers,
-				request.Description);
+				request.Description,
+				request.Genre);
 
 			await _commandSender.Send(command, cancellationToken);
 

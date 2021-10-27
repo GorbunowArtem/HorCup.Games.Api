@@ -6,15 +6,16 @@ namespace HorCup.Games.Tests.Factory
 	{
 		private readonly GamesFactory _factory;
 
-		public GameCreated GameCreated() => new()
-		{
-			Id = _factory.Id
-		};
-
 		public Events(GamesFactory factory)
 		{
 			_factory = factory;
 		}
+
+		public GameCreated GameCreated() => new()
+		{
+			Id = _factory.Id,
+			Genre = GamesFactory.Genre
+		};
 
 		public GameTitleSet GameTitleSet() => new()
 		{
