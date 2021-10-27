@@ -13,12 +13,19 @@ namespace HorCup.Games.Models
 		public int MaxPlayers { get; set; }
 
 		public string Description { get; set; }
+		
+		public string Genre { get; set; }
 
 		public bool Deleted { get; set; }
 
-		public Game(Guid id)
+		public Game(Guid id, string genre)
 		{
 			Id = id;
+			ApplyChange(new GameCreated
+			{
+				Genre = genre,
+				Id = id
+			});
 		}
 
 		private Game()
@@ -67,6 +74,11 @@ namespace HorCup.Games.Models
 			{
 				ApplyChange(new GameDeleted());
 			}
+		}
+
+		private void Apply(GameCreated evt)
+		{
+			Genre = evt.Genre;
 		}
 
 		private void Apply(GameTitleSet evt)

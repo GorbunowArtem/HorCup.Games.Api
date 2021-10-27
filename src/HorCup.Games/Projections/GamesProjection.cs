@@ -11,7 +11,9 @@ using MongoDB.Driver;
 
 namespace HorCup.Games.Projections
 {
-	public class GamesProjection : ICancellableEventHandler<GameTitleSet>,
+	public class GamesProjection :
+		ICancellableEventHandler<GameCreated>,
+		ICancellableEventHandler<GameTitleSet>,
 		ICancellableEventHandler<GamePlayersNumberChanged>,
 		ICancellableEventHandler<GameDescriptionChanged>,
 		ICancellableQueryHandler<GetGameByIdQuery, GameDto>,
@@ -26,14 +28,20 @@ namespace HorCup.Games.Projections
 			_games = client.GetCollection<GameDto>("Games");
 		}
 
+		public Task Handle(GameCreated message, CancellationToken token = new CancellationToken()) =>
+			_games.UpdateOneAsync(Builders<GameDto>.Filter.Eq(g => g.Id, message.Id),
+				Builders<GameDto>.Update
+					.Set(g => g.Id, message.Id)
+					.Set(g => g.Genre, message.Genre), new UpdateOptions
+				{
+					IsUpsert = true
+				}, token);
+
 		public Task Handle(GameTitleSet message, CancellationToken token = new()) =>
 			_games.UpdateOneAsync(Builders<GameDto>.Filter.Eq(g => g.Id, message.Id),
 				Builders<GameDto>.Update
 					.Set(g => g.Id, message.Id)
-					.Set(g => g.Title, message.Title), new UpdateOptions
-				{
-					IsUpsert = true
-				}, token);
+					.Set(g => g.Title, message.Title), cancellationToken: token);
 
 		public Task<GameDto> Handle(GetGameByIdQuery message, CancellationToken token = new()) =>
 			_games.Find(Builders<GameDto>.Filter.Eq(g => g.Id, message.Id)).FirstOrDefaultAsync(token);
@@ -46,6 +54,7 @@ namespace HorCup.Games.Projections
 		public Task Handle(GameDescriptionChanged message, CancellationToken token = new()) =>
 			_games.UpdateOneAsync(Builders<GameDto>.Filter.Eq(g => g.Id, message.Id),
 				Builders<GameDto>.Update.Set(g => g.Description, message.Description), cancellationToken: token);
+
 
 		public Task Handle(GameDeleted message, CancellationToken token = new()) =>
 			_games.DeleteOneAsync(Builders<GameDto>.Filter.Eq(g => g.Id, message.Id), token);

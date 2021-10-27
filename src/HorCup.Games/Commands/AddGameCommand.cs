@@ -8,5 +8,6 @@ namespace HorCup.Games.Commands
 		string Title,
 		int MinPlayers,
 		int MaxPlayers,
-		string Description) : ICommand;
+		string Description,
+		string Genre) : ICommand;
 }

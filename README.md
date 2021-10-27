@@ -21,7 +21,8 @@ docker-compose up
 TODOs:
 - [x] Add database creation if not exists
 - [ ] rebuild projections
-- [x] Unit tests
+- [x] Unit tests for command handlers
+- [ ] Unit tests for projections
 - [x] Extract repo
 - [ ] Business rules validation
 - [ ] Saga example

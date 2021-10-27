@@ -19,7 +19,7 @@ namespace HorCup.Games.Commands
 
 		public async Task Handle(AddGameCommand command, CancellationToken token = new())
 		{
-			var game = new Game(command.Id);
+			var game = new Game(command.Id, command.Genre);
 
 			game.SetTitle(command.Title);
 			game.SetPlayersCount(command.MinPlayers, command.MaxPlayers);

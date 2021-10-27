@@ -3,7 +3,7 @@ using FluentValidation.TestHelper;
 using HorCup.Games.Commands;
 using Xunit;
 
-namespace HorCup.Games.Tests.Commands
+namespace HorCup.Games.Tests.Validators
 {
 	public class AddGameValidatorTests
 	{
