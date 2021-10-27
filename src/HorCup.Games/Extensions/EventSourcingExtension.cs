@@ -91,8 +91,12 @@ namespace HorCup.Games.Extensions
 
 		private static void CreateDatabaseIfNotExists(string connectionString, string dbName)
 		{
+			var sb = new SqlConnectionStringBuilder(connectionString) { InitialCatalog = "master" };
+			sb.Remove("AttachDBFilename");
+			
 			SqlCommand cmd = null;
-			using var connection = new SqlConnection(connectionString);
+			
+			using var connection = new SqlConnection(sb.ConnectionString);
 			connection.Open();
 
 			using (cmd = new SqlCommand($"If(db_id(N'{dbName}') IS NULL) CREATE DATABASE [{dbName}]", connection))

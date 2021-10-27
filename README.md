@@ -19,8 +19,11 @@ docker-compose up
 - application will be available at http://host.docker.internal:5007
 
 TODOs:
-- [ ] Add database creation if not exists
+- [x] Add database creation if not exists
 - [ ] rebuild projections
-- [ ] Unit tests
+- [x] Unit tests
 - [x] Extract repo
-- [ ] Rules validation
+- [ ] Business rules validation
+- [ ] Saga example
+- [ ] Integration events example
+- [ ] Snapshots

@@ -29,12 +29,12 @@ namespace HorCup.Games.Tests.TestHelpers
 
         public Specification()
         {
-            var eventpublisher = new SpecEventPublisher();
-            var eventstorage = new SpecEventStorage(eventpublisher, Given().ToList());
-            var snapshotstorage = new SpecSnapShotStorage(Snapshot);
+            var eventPublisher = new SpecEventPublisher();
+            var eventStorage = new SpecEventStorage(eventPublisher, Given().ToList());
+            var snapshotStorage = new SpecSnapShotStorage(Snapshot);
 
             var snapshotStrategy = new DefaultSnapshotStrategy();
-            var repository = new SnapshotRepository(snapshotstorage, snapshotStrategy, new Repository(eventstorage), eventstorage);
+            var repository = new SnapshotRepository(snapshotStorage, snapshotStrategy, new Repository(eventStorage), eventStorage);
             Session = new Session(repository);
             Aggregate = GetAggregate().Result;
 
@@ -52,9 +52,9 @@ namespace HorCup.Games.Tests.TestHelpers
                 throw new InvalidCastException($"{nameof(handler)} is not a command handler of type {typeof(TCommand)}");
             }
 
-            Snapshot = snapshotstorage.Snapshot;
-            PublishedEvents = eventpublisher.PublishedEvents;
-            EventDescriptors = eventstorage.Events;
+            Snapshot = snapshotStorage.Snapshot;
+            PublishedEvents = eventPublisher.PublishedEvents;
+            EventDescriptors = eventStorage.Events;
         }
 
         private async Task<TAggregate> GetAggregate()
@@ -68,21 +68,5 @@ namespace HorCup.Games.Tests.TestHelpers
                 return null;
             }
         }
-    }
-
-    internal class SpecEventPublisher : IEventPublisher
-    {
-        public SpecEventPublisher()
-        {
-            PublishedEvents = new List<IEvent>();
-        }
-
-        public Task Publish<T>(T @event, CancellationToken cancellationToken = default) where T : class, IEvent
-        {
-            PublishedEvents.Add(@event);
-            return Task.CompletedTask;
-        }
-
-        public IList<IEvent> PublishedEvents { get; set; }
     }
 }
