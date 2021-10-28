@@ -10,7 +10,6 @@ namespace HorCup.Games.Services.Rebuild
 	{
 		private readonly IEventPublisher _publisher;
 		private readonly IStoreEvents _store;
-		private object _lock = new object();
 
 		public ProjectionRebuildService(IStoreEvents store, IEventPublisher publisher)
 		{
@@ -18,24 +17,20 @@ namespace HorCup.Games.Services.Rebuild
 			_publisher = publisher;
 		}
 
-		public async Task Execute()
+		public void Execute()
 		{
-			lock (_lock)
-			{
-				var client = new PollingClient2(_store.Advanced, commit =>
+			var client = new PollingClient2(_store.Advanced, commit =>
+				{
+					foreach (var eventMessage in commit.Events)
 					{
-						foreach (var eventMessage in commit.Events)
-						{
-							_publisher.Publish(eventMessage.Body as IEvent);
-							Thread.Sleep(500);
-						}
+						_publisher.Publish(eventMessage.Body as IEvent).GetAwaiter().GetResult();
+					}
 
-						return PollingClient2.HandlingResult.MoveToNext;
-					},
-					waitInterval: 3000);
+					return PollingClient2.HandlingResult.MoveToNext;
+				},
+				waitInterval: 3000);
 
-				client.StartFrom(0);
-			}
+			client.StartFrom(0);
 		}
 	}
 }

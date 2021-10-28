@@ -4,6 +4,6 @@ namespace HorCup.Games.Services.Rebuild
 {
 	public interface IProjectionRebuildService
 	{
-		Task Execute();
+		void Execute();
 	}
 }

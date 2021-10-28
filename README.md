@@ -20,7 +20,7 @@ docker-compose up
 
 TODOs:
 - [x] Add database creation if not exists
-- [ ] rebuild projections
+- [x] rebuild projections
 - [x] Unit tests for command handlers
 - [x] Unit tests for projections
 - [x] Extract repo
