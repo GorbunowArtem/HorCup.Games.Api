@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,19 +34,20 @@ namespace HorCup.Games.Controllers
 		[HttpGet]
 		[ProducesResponseType((int)HttpStatusCode.OK)]
 		public async Task<IActionResult> SearchGames(
-			[FromQuery] SearchGamesQuery query)
+			[FromQuery] SearchGamesQuery query,
+			CancellationToken token)
 		{
-			var result = await _queryProcessor.Query(query);
+			var (items, total) = await _queryProcessor.Query(query, token);
 
-			return Ok(result);
+			return Ok(new { Items = items.ToArray(), Total = total });
 		}
 
 		[HttpGet("{id:Guid}")]
 		[ProducesResponseType((int)HttpStatusCode.OK)]
 		[ProducesResponseType((int)HttpStatusCode.NotFound)]
-		public async Task<ActionResult<GameDetailsViewModel>> GetById([FromRoute] Guid id)
+		public async Task<ActionResult<GameDetailsViewModel>> GetById([FromRoute] Guid id, CancellationToken token)
 		{
-			var game = await _queryProcessor.Query(new GetGameByIdQuery(id));
+			var game = await _queryProcessor.Query(new GetGameByIdQuery(id), token);
 
 			return Ok(game);
 		}
@@ -54,8 +56,7 @@ namespace HorCup.Games.Controllers
 		[ProducesResponseType((int)HttpStatusCode.Created)]
 		[ProducesResponseType((int)HttpStatusCode.Conflict)]
 		public async Task<ActionResult<Guid>> Add(
-			[FromBody] AddEditGameRequest request,
-			CancellationToken cancellationToken)
+			[FromBody] AddEditGameRequest request)
 		{
 			var id = Guid.NewGuid();
 			var command = new CreateGameCommand(id,
@@ -65,7 +66,7 @@ namespace HorCup.Games.Controllers
 				request.Description,
 				request.Genre);
 
-			await _commandSender.Send(command, cancellationToken);
+			await _commandSender.Send(command);
 
 			return CreatedAtAction(nameof(Add), new { command.Id }, command.Id.ToString());
 		}
@@ -75,8 +76,7 @@ namespace HorCup.Games.Controllers
 		[ProducesResponseType((int)HttpStatusCode.NotFound)]
 		public async Task<IActionResult> Edit(
 			[FromRoute] Guid id,
-			[FromBody] AddEditGameRequest request,
-			CancellationToken token)
+			[FromBody] AddEditGameRequest request)
 		{
 			var command = new EditGameCommand(
 				id,
@@ -85,7 +85,7 @@ namespace HorCup.Games.Controllers
 				request.MinPlayers,
 				request.Description);
 
-			await _commandSender.Send(command, token);
+			await _commandSender.Send(command);
 
 			return NoContent();
 		}

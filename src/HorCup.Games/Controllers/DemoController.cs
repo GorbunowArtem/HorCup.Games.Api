@@ -9,19 +9,20 @@ using Microsoft.AspNetCore.Mvc;
 namespace HorCup.Games.Controllers
 {
 	[ApiController]
-	[Route("rebuild")]
-	public class Rebuild : ControllerBase
+	[Route("demo")]
+	public class DemoController : ControllerBase
 	{
 		private readonly IProjectionRebuildService _projectionRebuildService;
 		private readonly ICommandSender _commandSender;
 
-		public Rebuild(IProjectionRebuildService projectionRebuildService, ICommandSender commandSender)
+		public DemoController(IProjectionRebuildService projectionRebuildService, ICommandSender commandSender)
 		{
 			_projectionRebuildService = projectionRebuildService;
 			_commandSender = commandSender;
 		}
 
 		[HttpPost]
+		[Route("rebuild")]
 		public IActionResult Execute()
 		{
 			_projectionRebuildService.Execute();
@@ -31,7 +32,7 @@ namespace HorCup.Games.Controllers
 
 		[HttpPost]
 		[Route("populate")]
-		public async Task CreateTestData()
+		public async Task<IActionResult> CreateTestData()
 		{
 			var gameCommands = Enumerable.Range(1, 15)
 				.Select(
@@ -42,6 +43,8 @@ namespace HorCup.Games.Controllers
 			{
 				await _commandSender.Send(createGameCommand);
 			}
+
+			return Ok();
 		}
 	}
 }

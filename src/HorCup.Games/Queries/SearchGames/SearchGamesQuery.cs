@@ -13,6 +13,8 @@ namespace HorCup.Games.Queries.SearchGames
 
 		public int? MaxPlayers { get; set; }
 
-		public IEnumerable<Guid> ExceptIds { get; set; }
+		public int Take { get; set; } = 10;
+
+		public int Skip { get; set; }
 	}
 }
