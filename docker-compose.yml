@@ -4,9 +4,6 @@ services :
   sql-server :
     image : mcr.microsoft.com/mssql/server:2019-latest
 
-  eventstore.db :
-    image : eventstore/eventstore:20.10.2-buster-slim
-    
   mongodb :
     image : mongo
 #

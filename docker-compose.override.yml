@@ -10,27 +10,6 @@ services :
     volumes :
       - horcup-sql-server:/var/opt/mssql
 
-  eventstore.db :
-    environment :
-      - EVENTSTORE_CLUSTER_SIZE=1
-      - EVENTSTORE_RUN_PROJECTIONS=All
-      - EVENTSTORE_START_STANDARD_PROJECTIONS=true
-      - EVENTSTORE_EXT_TCP_PORT=1113
-      - EVENTSTORE_HTTP_PORT=2113
-      - EVENTSTORE_INSECURE=true
-      - EVENTSTORE_ENABLE_EXTERNAL_TCP=true
-      - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP=true
-    ports :
-      - "1113:1113"
-      - "2113:2113"
-    volumes :
-      - type : volume
-        source : horcup-volume-data
-        target : /var/lib/eventstore
-      - type : volume
-        source : horcup-volume-logs
-        target : /var/log/eventstore
-        
 #  rabbitmq :
 #    ports :
 #      - "15672:15672"
@@ -60,10 +39,4 @@ volumes :
     driver : local
     
   horcup-elasticsearchdata :
-    driver : local
-
-  horcup-volume-data :
-    driver : local
-    
-  horcup-volume-logs :
     driver : local
