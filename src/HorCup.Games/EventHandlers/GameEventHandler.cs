@@ -16,7 +16,7 @@ namespace HorCup.Games.EventHandlers
 			_publishEndpoint = publishEndpoint;
 		}
 
-		public Task Handle(GameTitleSet message, CancellationToken token = new CancellationToken()) =>
+		public Task Handle(GameTitleSet message, CancellationToken token = new()) =>
 			_publishEndpoint.Publish(new GameCreatedIntegrationEvent(message.Id, message.Title), token);
 	}
 }
