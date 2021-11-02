@@ -70,7 +70,7 @@ namespace HorCup.Games.Tests.Projections
 				.Returns(new MongoDbOptions
 				{
 					ConnectionString = "mongodb://localhost:27017",
-					DbName = "Games.Api.Test"
+					DatabaseName = "Games.Api.Test"
 				});
 
 			_factory = new GamesFactory();

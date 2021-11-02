@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace HorCup.Games.Services.Rebuild
+﻿namespace HorCup.Games.Services.Rebuild
 {
 	public interface IProjectionRebuildService
 	{

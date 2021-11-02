@@ -6,6 +6,6 @@ namespace HorCup.Games.Options
 
 		public string ConnectionString { get; set; }
 		
-		public string DbName { get; set; }
+		public string DatabaseName { get; set; }
 	}
 }

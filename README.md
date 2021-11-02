@@ -24,7 +24,3 @@ TODOs:
 - [x] Unit tests for command handlers
 - [x] Unit tests for projections
 - [x] Extract repo
-- [ ] Business rules validation
-- [ ] Saga example
-- [ ] Integration events example
-- [ ] Snapshots

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CQRSlite.Queries;
 using HorCup.Games.Models;

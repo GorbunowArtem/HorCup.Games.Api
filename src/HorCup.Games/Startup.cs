@@ -22,6 +22,7 @@ namespace HorCup.Games
 		{
 			services.Configure<SqlDbOptions>(Configuration.GetSection(SqlDbOptions.SqlDb));
 			services.Configure<MongoDbOptions>(Configuration.GetSection(MongoDbOptions.MongoDb));
+			services.Configure<EsOptions>(Configuration.GetSection(EsOptions.Elasticsearch));			
 
 			services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "HorCup", Version = "v1" }); });
 
@@ -32,8 +33,7 @@ namespace HorCup.Games
 			services.AddControllers();
 		}
 
-		public void Configure(
-			IApplicationBuilder app,
+		public void Configure(IApplicationBuilder app,
 			IWebHostEnvironment env)
 		{
 			if (env.IsDevelopment())
