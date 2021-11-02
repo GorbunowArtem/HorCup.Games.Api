@@ -10,10 +10,10 @@ services :
     volumes :
       - horcup-sql-server:/var/opt/mssql
 
-#  rabbitmq :
-#    ports :
-#      - "15672:15672"
-#      - "5672:5672"
+  rabbitmq :
+    ports :
+      - "15672:15672"
+      - "5672:5672"
 
   mongodb :
     ports :
@@ -21,14 +21,14 @@ services :
     volumes :
       - horcup-mongodbdata:/var/opt/mongodb
 
-  elasticsearch:
-    ports: 
+  elasticsearch :
+    ports :
       - "9200:9200"
       - "9300:9300"
-    environment:
+    environment :
       - xpack.security.enabled=false
       - discovery.type=single-node
-    volumes:
+    volumes :
       - horcup-elasticsearchdata:/var/opt/elasticsearch
 
 volumes :
@@ -37,6 +37,6 @@ volumes :
 
   horcup-mongodbdata :
     driver : local
-    
+
   horcup-elasticsearchdata :
     driver : local

@@ -3,6 +3,7 @@ using System.Linq;
 using AutoFixture;
 using CQRSlite.Events;
 using FluentAssertions;
+using HorCup.Games.CommandHandlers;
 using HorCup.Games.Commands;
 using HorCup.Games.Events;
 using HorCup.Games.Models;

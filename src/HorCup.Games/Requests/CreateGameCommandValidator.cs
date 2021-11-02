@@ -1,11 +1,12 @@
 ﻿using FluentValidation;
+using HorCup.Games.Commands;
 using HorCup.Games.Models;
 
-namespace HorCup.Games.Commands
+namespace HorCup.Games.Requests
 {
-	public class AddGameCommandValidator: AbstractValidator<CreateGameCommand>
+	public class CreateGameCommandValidator: AbstractValidator<CreateEditGameRequest>
 	{
-		public AddGameCommandValidator()
+		public CreateGameCommandValidator()
 		{
 			var constraints = new GamesConstraints();
 			

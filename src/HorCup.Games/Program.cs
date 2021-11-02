@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using CQRSlite.Routing;
+using HorCup.Games.CommandHandlers;
 using HorCup.Games.Commands;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

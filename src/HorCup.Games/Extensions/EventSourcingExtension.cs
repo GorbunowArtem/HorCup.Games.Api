@@ -8,6 +8,7 @@ using CQRSlite.Events;
 using CQRSlite.Messages;
 using CQRSlite.Queries;
 using CQRSlite.Routing;
+using HorCup.Games.CommandHandlers;
 using HorCup.Games.Commands;
 using HorCup.Games.EventStore;
 using HorCup.Games.Options;

@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorCup.Games.Tests", "tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "docker-compose", "docker-compose.dcproj", "{DBEFE47D-0BFE-4BAF-AA30-7AFD2566E22A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorCup.Games.External", "src\HorCup.Games.External\HorCup.Games.External.csproj", "{3DA70E12-BBB8-4452-AD3B-73C6DAB88F24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{DBEFE47D-0BFE-4BAF-AA30-7AFD2566E22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBEFE47D-0BFE-4BAF-AA30-7AFD2566E22A}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{DBEFE47D-0BFE-4BAF-AA30-7AFD2566E22A}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{3DA70E12-BBB8-4452-AD3B-73C6DAB88F24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA70E12-BBB8-4452-AD3B-73C6DAB88F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA70E12-BBB8-4452-AD3B-73C6DAB88F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA70E12-BBB8-4452-AD3B-73C6DAB88F24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

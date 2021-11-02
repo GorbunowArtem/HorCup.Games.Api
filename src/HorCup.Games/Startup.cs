@@ -1,5 +1,8 @@
+using FluentValidation.AspNetCore;
 using HorCup.Games.Extensions;
 using HorCup.Games.Options;
+using HorCup.Games.Requests;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +25,7 @@ namespace HorCup.Games
 		{
 			services.Configure<SqlDbOptions>(Configuration.GetSection(SqlDbOptions.SqlDb));
 			services.Configure<MongoDbOptions>(Configuration.GetSection(MongoDbOptions.MongoDb));
-			services.Configure<EsOptions>(Configuration.GetSection(EsOptions.Elasticsearch));			
+			services.Configure<EsOptions>(Configuration.GetSection(EsOptions.Elasticsearch));
 
 			services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "HorCup", Version = "v1" }); });
 
@@ -30,10 +33,18 @@ namespace HorCup.Games
 
 			services.AddHealthChecks();
 
-			services.AddControllers();
+			services.AddControllers()
+				.AddFluentValidation(v => v.RegisterValidatorsFromAssemblyContaining<CreateGameCommandValidator>());
+
+			services.AddMassTransit(t =>
+				// t.UsingRabbitMq((context, configuration) => { configuration.Host("rabbitmq"); }));
+				t.UsingRabbitMq());
+
+			services.AddMassTransitHostedService();
 		}
 
-		public void Configure(IApplicationBuilder app,
+		public void Configure(
+			IApplicationBuilder app,
 			IWebHostEnvironment env)
 		{
 			if (env.IsDevelopment())
@@ -42,9 +53,9 @@ namespace HorCup.Games
 			}
 
 			app.UseCors("AllowAll");
-					
+
 			app.UseSwagger();
-			
+
 			app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HorCup.Games v1"));
 
 			app.UseRouting();

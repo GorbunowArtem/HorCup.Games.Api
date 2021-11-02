@@ -56,7 +56,7 @@ namespace HorCup.Games.Controllers
 		[ProducesResponseType((int)HttpStatusCode.Created)]
 		[ProducesResponseType((int)HttpStatusCode.Conflict)]
 		public async Task<ActionResult<Guid>> Add(
-			[FromBody] AddEditGameRequest request)
+			[FromBody] CreateEditGameRequest request)
 		{
 			var id = Guid.NewGuid();
 			var command = new CreateGameCommand(id,
@@ -76,7 +76,7 @@ namespace HorCup.Games.Controllers
 		[ProducesResponseType((int)HttpStatusCode.NotFound)]
 		public async Task<IActionResult> Edit(
 			[FromRoute] Guid id,
-			[FromBody] AddEditGameRequest request)
+			[FromBody] CreateEditGameRequest request)
 		{
 			var command = new EditGameCommand(
 				id,

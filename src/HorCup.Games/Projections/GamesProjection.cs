@@ -24,7 +24,6 @@ namespace HorCup.Games.Projections
 		public GamesProjection(IOptions<MongoDbOptions> options)
 		{
 			var client = new MongoClient(options.Value.ConnectionString).GetDatabase("GamesApiRead");
-
 			_games = client.GetCollection<GameDto>("Games");
 		}
 

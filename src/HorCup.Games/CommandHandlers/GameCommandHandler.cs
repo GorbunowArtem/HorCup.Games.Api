@@ -2,9 +2,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using CQRSlite.Commands;
 using CQRSlite.Domain;
+using HorCup.Games.Commands;
 using HorCup.Games.Models;
 
-namespace HorCup.Games.Commands
+namespace HorCup.Games.CommandHandlers
 {
 	public class GameCommandHandler : ICancellableCommandHandler<CreateGameCommand>,
 		ICancellableCommandHandler<EditGameCommand>,

@@ -36,18 +36,13 @@ namespace HorCup.Games.EventStore
 		public Task<IEnumerable<IEvent>> Get(
 			Guid aggregateId,
 			int fromVersion,
-			CancellationToken cancellationToken = default)
-		{
-			var events = _store.Advanced.GetFrom(
+			CancellationToken cancellationToken = default) =>
+			Task.FromResult(_store.Advanced.GetFrom(
 					"default",
 					aggregateId.ToString(),
 					fromVersion + 1, int.MaxValue)
 				.SelectMany(e => e.Events)
 				.Select(e => e.Body)
-				.OfType<IEvent>()
-				.ToList();
-
-			return Task.FromResult(events.AsEnumerable());
-		}
+				.OfType<IEvent>());
 	}
 }

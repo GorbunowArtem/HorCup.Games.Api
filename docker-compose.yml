@@ -6,9 +6,9 @@ services :
 
   mongodb :
     image : mongo
-#
-#  rabbitmq :
-#    image : masstransit/rabbitmq
-#    
+
+  rabbitmq :
+    image : masstransit/rabbitmq
+
   elasticsearch :
     image : elasticsearch:7.14.2
