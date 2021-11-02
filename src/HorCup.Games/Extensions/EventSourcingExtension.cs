@@ -57,7 +57,8 @@ namespace HorCup.Games.Extensions
 				.Compress()
 				.Build());
 
-			services.AddScoped<IEventStore, SqlEventStore>();
+			// services.AddScoped<IEventStore, SqlEventStore>();
+			services.AddScoped<IEventStore, EventStoreDbStore>();
 			services.AddScoped<ICache, MemoryCache>();
 			services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>()),
 				y.GetService<IEventStore>(), y.GetService<ICache>()));
