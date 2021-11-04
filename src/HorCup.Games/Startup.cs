@@ -36,9 +36,8 @@ namespace HorCup.Games
 			services.AddControllers()
 				.AddFluentValidation(v => v.RegisterValidatorsFromAssemblyContaining<CreateGameCommandValidator>());
 
-			services.AddMassTransit(t =>
-				// t.UsingRabbitMq((context, configuration) => { configuration.Host("rabbitmq"); }));
-				t.UsingRabbitMq());
+			services.AddMassTransit(configuration =>
+				configuration.UsingRabbitMq((context, configuration) => { configuration.Host(Configuration["RabbitMqHost"]); }));
 
 			services.AddMassTransitHostedService();
 		}
