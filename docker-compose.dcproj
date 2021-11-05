@@ -6,14 +6,14 @@
     <ProjectGuid>dbefe47d-0bfe-4baf-aa30-7afd2566e22b</ProjectGuid>
     <DockerLaunchBrowser>True</DockerLaunchBrowser>
     <DockerServiceName>horcup</DockerServiceName>
-    <DockerServiceUrl>http://host.docker.internal:5100</DockerServiceUrl>
+    <DockerServiceUrl>http://host.docker.internal:5004</DockerServiceUrl>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
   </PropertyGroup>
   <ItemGroup>
     <None Include=".dockerignore" />
-    <None Include="docker-compose.override.yml">
-      <DependentUpon>docker-compose.yml</DependentUpon>
-    </None>
     <None Include="docker-compose.yml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="docker-compose.environment.yml" />
   </ItemGroup>
 </Project>

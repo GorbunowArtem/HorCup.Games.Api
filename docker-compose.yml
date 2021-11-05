@@ -3,12 +3,65 @@ version : "3.4"
 services :
   sql-server :
     image : mcr.microsoft.com/mssql/server:2019-latest
+    environment :
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports :
+      - "5433:1433"
+    volumes :
+      - horcup-sql-server:/var/opt/mssql
 
   mongodb :
     image : mongo
+    ports :
+      - "27017:27017"
+    volumes :
+      - horcup-mongodbdata:/var/opt/mongodb
 
   rabbitmq :
     image : masstransit/rabbitmq
+    ports :
+      - "15672:15672"
+      - "5672:5672"
+
 
   elasticsearch :
     image : elasticsearch:7.14.2
+    ports :
+      - "9200:9200"
+      - "9300:9300"
+    environment :
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    volumes :
+      - horcup-elasticsearchdata:/var/opt/elasticsearch
+
+
+  games-api:
+    image : ${DOCKER_REGISTRY-horcup}/games.api:${PLATFORM:-linux}-${TAG:-latest}
+    build :
+      context : .
+      dockerfile : src/HorCup.Games/Dockerfile
+    environment :
+      - ASPNETCORE_ENVIRONMENT=Development
+      - SqlDb__ConnectionString=${HORCUP_AZURE_GAMES_DB:-Server=sql-server;Database=HorCup.Games.Write;User Id=sa;Password=Pass@word;Trusted_Connection=False;MultipleActiveResultSets=True;Integrated Security=False}
+      - RabbitMqHost=rabbitmq
+      - MongoDb__ConnectionString=mongodb://mongodb
+      - MongoDb__DatabaseName=HorCup.Games.Read
+    ports :
+      - "5003:80"
+    depends_on :
+        - sql-server
+        - mongodb
+        - rabbitmq
+        - elasticsearch
+
+volumes :
+  horcup-sql-server :
+    driver : local
+
+  horcup-mongodbdata :
+    driver : local
+
+  horcup-elasticsearchdata :
+    driver : local

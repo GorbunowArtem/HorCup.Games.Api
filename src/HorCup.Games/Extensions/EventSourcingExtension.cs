@@ -55,7 +55,6 @@ namespace HorCup.Games.Extensions
 				.WithDialect(new MsSqlDialect())
 				.InitializeStorageEngine()
 				.UsingJsonSerialization()
-				.Compress()
 				.Build());
 
 			services.AddScoped<IEventStore, SqlEventStore>();

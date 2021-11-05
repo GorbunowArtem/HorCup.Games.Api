@@ -2,6 +2,7 @@ version : "3.4"
 
 services :
   sql-server :
+    image : mcr.microsoft.com/mssql/server:2019-latest
     environment :
       - SA_PASSWORD=Pass@word
       - ACCEPT_EULA=Y
@@ -10,18 +11,22 @@ services :
     volumes :
       - horcup-sql-server:/var/opt/mssql
 
-  rabbitmq :
-    ports :
-      - "15672:15672"
-      - "5672:5672"
-
   mongodb :
+    image : mongo
     ports :
       - "27017:27017"
     volumes :
       - horcup-mongodbdata:/var/opt/mongodb
 
+  rabbitmq :
+    image : masstransit/rabbitmq
+    ports :
+      - "15672:15672"
+      - "5672:5672"
+
+
   elasticsearch :
+    image : elasticsearch:7.14.2
     ports :
       - "9200:9200"
       - "9300:9300"
