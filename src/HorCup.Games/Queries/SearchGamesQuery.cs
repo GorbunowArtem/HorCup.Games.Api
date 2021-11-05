@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using CQRSlite.Queries;
 using HorCup.Games.Models;
 
-namespace HorCup.Games.Queries.SearchGames
+namespace HorCup.Games.Queries
 {
 	public record SearchGamesQuery : IQuery<(IEnumerable<GameSearchModel> items, long total)>
 	{

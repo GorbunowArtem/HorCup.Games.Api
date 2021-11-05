@@ -7,7 +7,7 @@ using CQRSlite.Queries;
 using HorCup.Games.Events;
 using HorCup.Games.Models;
 using HorCup.Games.Options;
-using HorCup.Games.Queries.SearchGames;
+using HorCup.Games.Queries;
 using Microsoft.Extensions.Options;
 using Nest;
 using TupleExtensions;

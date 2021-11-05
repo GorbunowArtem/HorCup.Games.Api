@@ -8,7 +8,6 @@ using CQRSlite.Commands;
 using CQRSlite.Queries;
 using HorCup.Games.Commands;
 using HorCup.Games.Queries;
-using HorCup.Games.Queries.SearchGames;
 using HorCup.Games.Requests;
 using HorCup.Games.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -99,20 +98,5 @@ namespace HorCup.Games.Controllers
 
 			return NoContent();
 		}
-		//
-		// [HttpHead]
-		// [ProducesResponseType((int) HttpStatusCode.OK)]
-		// [ProducesResponseType((int) HttpStatusCode.Conflict)]
-		// public async Task<IActionResult> IsTitleUnique(string title, Guid? id)
-		// {
-		// 	var isUnique = await _sender.Send(new IsTitleUniqueQuery(title, id));
-		//
-		// 	if (!isUnique)
-		// 	{
-		// 		return Conflict("Title is not unique.");
-		// 	}
-		//
-		// 	return Ok();
-		// }
 	}
 }
