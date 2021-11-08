@@ -3,17 +3,19 @@ using FluentAssertions;
 using HorCup.Games.Options;
 using HorCup.Games.Projections;
 using HorCup.Games.Tests.Factory;
+using HorCup.Games.Tests.TestHelpers;
 using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
 namespace HorCup.Games.Tests.Projections
 {
-	public class GameProjectionTests
+	public class GameProjectionTests: IClassFixture<MongoTestSetup>
 	{
 		private readonly GamesProjection _sut;
 		private readonly GamesFactory _factory;
-
+		private readonly MongoTestSetup _mongoTestSetup;
+		
 		[Fact]
 		public async Task ShouldSetGenre()
 		{
@@ -63,8 +65,9 @@ namespace HorCup.Games.Tests.Projections
 				.BeTrue();
 		}
 
-		public GameProjectionTests()
+		public GameProjectionTests(MongoTestSetup mongoTestSetup)
 		{
+			_mongoTestSetup = mongoTestSetup;
 			var m = new Mock<IOptions<MongoDbOptions>>();
 			m.Setup(o => o.Value)
 				.Returns(new MongoDbOptions
