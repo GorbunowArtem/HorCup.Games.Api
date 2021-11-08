@@ -1,6 +1,6 @@
-namespace HorCup.Games.Requests
+namespace HorCup.Games.Requests.CreateGame
 {
-	public record CreateEditGameRequest(
+	public record CreateGameRequest(
 		string Title,
 		int MaxPlayers,
 		int MinPlayers,

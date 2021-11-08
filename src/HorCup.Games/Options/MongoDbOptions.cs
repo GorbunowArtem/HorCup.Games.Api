@@ -7,6 +7,7 @@ namespace HorCup.Games.Options
 		public string ConnectionString { get; set; }
 		
 		public string DatabaseName { get; set; }
+		
 
 		public SqlDbOptions Type { get; set; }
 	}

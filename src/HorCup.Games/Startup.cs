@@ -1,7 +1,7 @@
 using FluentValidation.AspNetCore;
 using HorCup.Games.Extensions;
 using HorCup.Games.Options;
-using HorCup.Games.Requests;
+using HorCup.Games.Requests.CreateGame;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,7 +34,7 @@ namespace HorCup.Games
 			services.AddHealthChecks();
 
 			services.AddControllers()
-				.AddFluentValidation(v => v.RegisterValidatorsFromAssemblyContaining<CreateGameCommandValidator>());
+				.AddFluentValidation(v => v.RegisterValidatorsFromAssemblyContaining<CreateGameRequestValidator>());
 
 			services.AddMassTransit(configuration =>
 				configuration.UsingRabbitMq((context, configuration) => { configuration.Host(Configuration["RabbitMqHost"]); }));

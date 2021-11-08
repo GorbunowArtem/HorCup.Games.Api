@@ -4,16 +4,10 @@ using HorCup.Games.Models;
 
 namespace HorCup.Games.Queries
 {
-	public record SearchGamesQuery : IQuery<(IEnumerable<GameSearchModel> items, long total)>
-	{
-		public string SearchText { get; set; }
-
-		public int? MinPlayers { get; set; }
-
-		public int? MaxPlayers { get; set; }
-
-		public int Take { get; set; } = 10;
-
-		public int Skip { get; set; }
-	}
+	public record SearchGamesQuery(
+		string SearchText,
+		int? MinPlayers,
+		int? MaxPlayers,
+		int Take,
+		int Skip) : IQuery<(IEnumerable<GameSearchModel> items, long total)>;
 }

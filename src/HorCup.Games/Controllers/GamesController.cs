@@ -8,7 +8,7 @@ using CQRSlite.Commands;
 using CQRSlite.Queries;
 using HorCup.Games.Commands;
 using HorCup.Games.Queries;
-using HorCup.Games.Requests;
+using HorCup.Games.Requests.CreateGame;
 using HorCup.Games.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -55,7 +55,7 @@ namespace HorCup.Games.Controllers
 		[ProducesResponseType((int)HttpStatusCode.Created)]
 		[ProducesResponseType((int)HttpStatusCode.Conflict)]
 		public async Task<ActionResult<Guid>> Add(
-			[FromBody] CreateEditGameRequest request)
+			[FromBody] CreateGameRequest request)
 		{
 			var id = Guid.NewGuid();
 			var command = new CreateGameCommand(id,
@@ -75,7 +75,7 @@ namespace HorCup.Games.Controllers
 		[ProducesResponseType((int)HttpStatusCode.NotFound)]
 		public async Task<IActionResult> Edit(
 			[FromRoute] Guid id,
-			[FromBody] CreateEditGameRequest request)
+			[FromBody] CreateGameRequest request)
 		{
 			var command = new EditGameCommand(
 				id,

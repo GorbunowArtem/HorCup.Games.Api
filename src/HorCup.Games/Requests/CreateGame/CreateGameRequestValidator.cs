@@ -1,15 +1,14 @@
 ﻿using FluentValidation;
-using HorCup.Games.Commands;
 using HorCup.Games.Models;
 
-namespace HorCup.Games.Requests
+namespace HorCup.Games.Requests.CreateGame
 {
-	public class CreateGameCommandValidator: AbstractValidator<CreateEditGameRequest>
+	public class CreateGameRequestValidator : AbstractValidator<CreateGameRequest>
 	{
-		public CreateGameCommandValidator()
+		public CreateGameRequestValidator()
 		{
 			var constraints = new GamesConstraints();
-			
+
 			RuleFor(g => g.Title)
 				.NotNull()
 				.NotEmpty()
@@ -19,11 +18,21 @@ namespace HorCup.Games.Requests
 				.GreaterThanOrEqualTo(1)
 				.LessThanOrEqualTo(constraints.MaxPlayers)
 				.GreaterThanOrEqualTo(p => p.MinPlayers);
-			
+
 			RuleFor(g => g.MinPlayers)
 				.GreaterThanOrEqualTo(1)
 				.LessThanOrEqualTo(constraints.MinPlayers)
 				.LessThanOrEqualTo(p => p.MaxPlayers);
+
+			RuleFor(g => g.Description)
+				.NotNull()
+				.NotEmpty()
+				.MaximumLength(500);
+
+			RuleFor(g => g.Genre)
+				.NotNull()
+				.NotEmpty()
+				.MaximumLength(50);
 		}
 	}
 }
