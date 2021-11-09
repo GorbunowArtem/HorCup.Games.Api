@@ -14,7 +14,7 @@ using TupleExtensions;
 
 namespace HorCup.Games.Projections
 {
-	public class GameSearchProjection :
+	public class GamesSearchProjection :
 		ICancellableEventHandler<GameCreated>,
 		ICancellableEventHandler<GameTitleSet>,
 		ICancellableEventHandler<GamePlayersNumberChanged>,
@@ -24,7 +24,7 @@ namespace HorCup.Games.Projections
 		private const string GameIndex = "games";
 		private readonly ElasticClient _client;
 
-		public GameSearchProjection(IOptions<EsOptions> options)
+		public GamesSearchProjection(IOptions<EsOptions> options)
 		{
 			_client = new ElasticClient(new ConnectionSettings(new Uri(options.Value.ConnectionString))
 				.DefaultIndex(GameIndex));

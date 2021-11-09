@@ -23,6 +23,7 @@ namespace HorCup.Games.Tests.TestHelpers
 		public void Dispose()
 		{
 			_env.Down().GetAwaiter().GetResult();
+			_env.Dispose();
 		}
 	}
 }
