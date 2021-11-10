@@ -14,10 +14,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HorCup.Games.Controllers
 {
-	[ExcludeFromCodeCoverage]
 	[ApiController]
 	[Route("games")]
-	public class GamesController : Controller
+	public class GamesController : ControllerBase
 	{
 		private readonly ICommandSender _commandSender;
 		private readonly IQueryProcessor _queryProcessor;
