@@ -14,7 +14,9 @@ namespace HorCup.Games.Tests.Factory
 		public GameCreated GameCreated() => new()
 		{
 			Id = _factory.Id,
-			Genre = GamesFactory.Genre
+			Genre = GamesFactory.Genre,
+			MaxPlayers = GamesFactory.MaxPlayers,
+			MinPlayers = GamesFactory.MinPlayers,
 		};
 
 		public GameTitleSet GameTitleSet() => new()
@@ -27,13 +29,6 @@ namespace HorCup.Games.Tests.Factory
 		{
 			Id = _factory.Id,
 			Description = GamesFactory.Description
-		};
-
-		public GamePlayersNumberChanged GamePlayersNumberChanged() => new()
-		{
-			Id = _factory.Id,
-			MaxPlayers = GamesFactory.MaxPlayers,
-			MinPlayers = GamesFactory.MinPlayers,
 		};
 	}
 }

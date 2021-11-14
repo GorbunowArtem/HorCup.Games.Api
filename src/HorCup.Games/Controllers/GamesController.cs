@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -57,6 +56,7 @@ namespace HorCup.Games.Controllers
 			[FromBody] CreateGameRequest request)
 		{
 			var id = Guid.NewGuid();
+
 			var command = new CreateGameCommand(id,
 				request.Title,
 				request.MinPlayers,
@@ -79,8 +79,6 @@ namespace HorCup.Games.Controllers
 			var command = new EditGameCommand(
 				id,
 				request.Title,
-				request.MaxPlayers,
-				request.MinPlayers,
 				request.Description);
 
 			await _commandSender.Send(command);
@@ -90,7 +88,6 @@ namespace HorCup.Games.Controllers
 
 		[HttpDelete("{id:Guid}")]
 		[ProducesResponseType((int)HttpStatusCode.NoContent)]
-		[ProducesResponseType((int)HttpStatusCode.NotFound)]
 		public async Task<IActionResult> Delete([FromRoute] Guid id)
 		{
 			await _commandSender.Send(new DeleteGameCommand(id));

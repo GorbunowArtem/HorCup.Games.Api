@@ -52,7 +52,6 @@ namespace HorCup.Games.Tests.Projections
 		public async Task ShouldSetPlayersQuantity()
 		{
 			await _sut.Handle(_factory.Events.GameCreated());
-			await _sut.Handle(_factory.Events.GamePlayersNumberChanged());
 
 			var game = await _sut.Handle(_factory.Queries.GetGameByIdQuery());
 

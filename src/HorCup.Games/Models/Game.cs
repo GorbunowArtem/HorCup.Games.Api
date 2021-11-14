@@ -18,18 +18,25 @@ namespace HorCup.Games.Models
 
 		public bool Deleted { get; set; }
 
-		public Game(Guid id, string genre)
+		private Game()
+		{
+		}
+
+		public Game(
+			Guid id,
+			string genre,
+			int minPlayers,
+			int maxPlayers)
 		{
 			Id = id;
 			ApplyChange(new GameCreated
 			{
 				Genre = genre,
+				MaxPlayers = maxPlayers,
+				MinPlayers = minPlayers,
 				Id = id
 			});
-		}
 
-		private Game()
-		{
 		}
 
 		public void SetTitle(string title)
@@ -40,19 +47,6 @@ namespace HorCup.Games.Models
 				ApplyChange(new GameTitleSet
 				{
 					Title = title
-				});
-			}
-		}
-
-		public void SetPlayersCount(int minPlayers, int maxPlayers)
-		{
-			if (minPlayers != MinPlayers
-			    || maxPlayers != MaxPlayers)
-			{
-				ApplyChange(new GamePlayersNumberChanged
-				{
-					MaxPlayers = maxPlayers,
-					MinPlayers = minPlayers,
 				});
 			}
 		}
@@ -79,19 +73,14 @@ namespace HorCup.Games.Models
 		private void Apply(GameCreated evt)
 		{
 			Genre = evt.Genre;
+			MaxPlayers = evt.MaxPlayers;
+			MinPlayers = evt.MinPlayers;
 		}
 
 		private void Apply(GameTitleSet evt)
 		{
 			Title = evt.Title;
 		}
-
-		private void Apply(GamePlayersNumberChanged evt)
-		{
-			MaxPlayers = evt.MaxPlayers;
-			MinPlayers = evt.MinPlayers;
-		}
-
 
 		private void Apply(GameDescriptionChanged evt)
 		{

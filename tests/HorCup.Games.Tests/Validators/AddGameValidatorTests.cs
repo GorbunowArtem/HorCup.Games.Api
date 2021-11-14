@@ -1,6 +1,5 @@
 using AutoFixture;
 using FluentValidation.TestHelper;
-using HorCup.Games.Commands;
 using HorCup.Games.Requests.CreateGame;
 using Xunit;
 

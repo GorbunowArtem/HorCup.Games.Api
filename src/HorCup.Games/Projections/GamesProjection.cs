@@ -14,7 +14,6 @@ namespace HorCup.Games.Projections
 	public class GamesProjection :
 		ICancellableEventHandler<GameCreated>,
 		ICancellableEventHandler<GameTitleSet>,
-		ICancellableEventHandler<GamePlayersNumberChanged>,
 		ICancellableEventHandler<GameDescriptionChanged>,
 		ICancellableQueryHandler<GetGameByIdQuery, GameDto>,
 		ICancellableEventHandler<GameDeleted>
@@ -31,7 +30,10 @@ namespace HorCup.Games.Projections
 			_games.UpdateOneAsync(Builders<GameDto>.Filter.Eq(g => g.Id, message.Id),
 				Builders<GameDto>.Update
 					.Set(g => g.Id, message.Id)
-					.Set(g => g.Genre, message.Genre), new UpdateOptions
+					.Set(g => g.Genre, message.Genre)
+					.Set(g => g.MinPlayers, message.MinPlayers)
+					.Set(g => g.MaxPlayers, message.MaxPlayers),
+				new UpdateOptions
 				{
 					IsUpsert = true
 				}, token);
@@ -44,11 +46,6 @@ namespace HorCup.Games.Projections
 
 		public Task<GameDto> Handle(GetGameByIdQuery message, CancellationToken token = new()) =>
 			_games.Find(Builders<GameDto>.Filter.Eq(g => g.Id, message.Id)).FirstOrDefaultAsync(token);
-
-		public Task Handle(GamePlayersNumberChanged message, CancellationToken token = new()) =>
-			_games.UpdateOneAsync(Builders<GameDto>.Filter.Eq(g => g.Id, message.Id),
-				Builders<GameDto>.Update.Set(g => g.MaxPlayers, message.MaxPlayers)
-					.Set(g => g.MinPlayers, message.MinPlayers), cancellationToken: token);
 
 		public Task Handle(GameDescriptionChanged message, CancellationToken token = new()) =>
 			_games.UpdateOneAsync(Builders<GameDto>.Filter.Eq(g => g.Id, message.Id),

@@ -17,7 +17,6 @@ namespace HorCup.Games.Projections
 	public class GamesSearchProjection :
 		ICancellableEventHandler<GameCreated>,
 		ICancellableEventHandler<GameTitleSet>,
-		ICancellableEventHandler<GamePlayersNumberChanged>,
 		ICancellableQueryHandler<SearchGamesQuery, (IEnumerable<GameSearchModel> items, long total)>,
 		ICancellableEventHandler<GameDeleted>
 	{
@@ -33,7 +32,9 @@ namespace HorCup.Games.Projections
 		public Task Handle(GameCreated message, CancellationToken token = new()) =>
 			_client.IndexDocumentAsync(new GameSearchModel
 			{
-				Id = message.Id
+				Id = message.Id,
+				MinPlayers = message.MinPlayers,
+				MaxPlayers = message.MaxPlayers
 			}, token);
 
 		public Task Handle(GameTitleSet message, CancellationToken token = new()) =>
@@ -41,14 +42,6 @@ namespace HorCup.Games.Projections
 				g => g.Doc(new
 				{
 					message.Title
-				}), token);
-
-		public Task Handle(GamePlayersNumberChanged message, CancellationToken token = new()) =>
-			_client.UpdateAsync<GameSearchModel, object>(message.Id,
-				g => g.Doc(new
-				{
-					message.MinPlayers,
-					message.MaxPlayers
 				}), token);
 
 		public Task Handle(GameDeleted message, CancellationToken token = new()) =>
