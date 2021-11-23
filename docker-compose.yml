@@ -36,26 +36,6 @@ services :
     volumes :
       - horcup-elasticsearchdata:/var/opt/elasticsearch
 
-
-  games-api:
-    image : ${DOCKER_REGISTRY-horcup}/games.api:${PLATFORM:-linux}-${TAG:-latest}
-    build :
-      context : .
-      dockerfile : src/HorCup.Games/Dockerfile
-    environment :
-      - ASPNETCORE_ENVIRONMENT=Development
-      - SqlDb__ConnectionString=${HORCUP_AZURE_GAMES_DB:-Server=sql-server;Database=HorCup.Games.Write;User Id=sa;Password=Pass@word;Trusted_Connection=False;MultipleActiveResultSets=True;Integrated Security=False}
-      - RabbitMqHost=rabbitmq
-      - MongoDb__ConnectionString=mongodb://mongodb
-      - MongoDb__DatabaseName=HorCup.Games.Read
-    ports :
-      - "5003:80"
-    depends_on :
-        - sql-server
-        - mongodb
-        - rabbitmq
-        - elasticsearch
-
 volumes :
   horcup-sql-server :
     driver : local

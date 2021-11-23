@@ -1,26 +1,19 @@
-#DDD+CQRS+ES Microservice example
+# DDD+CQRS+ES Microservice example
 
-## Technologies used:
+## Libraries used:
 - [CQRS Lite](https://github.com/gautema/CQRSlite)
 - [NEventStore](https://github.com/NEventStore/NEventStore)
 
 ## Prerequisites:
 
 - Docker
+- .NET 5
 
-## Run an application:
+## Run required infrastructure:
 
 - from repository root run
 
 ```c#
 docker-compose up
 ```
-
-- application will be available at http://host.docker.internal:5007
-
-TODOs:
-- [x] Add database creation if not exists
-- [x] rebuild projections
-- [x] Unit tests for command handlers
-- [x] Unit tests for projections
-- [x] Extract repo
+ Build and run application, api will be available at https://localhost:5003/swagger/index.html

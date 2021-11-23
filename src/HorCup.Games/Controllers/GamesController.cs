@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using CQRSlite.Commands;
 using CQRSlite.Queries;
 using HorCup.Games.Commands;
+using HorCup.Games.Models;
 using HorCup.Games.Queries;
 using HorCup.Games.Requests.CreateGame;
+using HorCup.Games.Requests.EditGame;
 using HorCup.Games.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,7 +44,7 @@ namespace HorCup.Games.Controllers
 		[HttpGet("{id:Guid}")]
 		[ProducesResponseType((int)HttpStatusCode.OK)]
 		[ProducesResponseType((int)HttpStatusCode.NotFound)]
-		public async Task<ActionResult<GameDetailsViewModel>> GetById([FromRoute] Guid id, CancellationToken token)
+		public async Task<ActionResult<GameViewModel>> GetById([FromRoute] Guid id, CancellationToken token)
 		{
 			var game = await _queryProcessor.Query(new GetGameByIdQuery(id), token);
 
@@ -74,7 +76,7 @@ namespace HorCup.Games.Controllers
 		[ProducesResponseType((int)HttpStatusCode.NotFound)]
 		public async Task<IActionResult> Edit(
 			[FromRoute] Guid id,
-			[FromBody] CreateGameRequest request)
+			[FromBody] EditGameRequest request)
 		{
 			var command = new EditGameCommand(
 				id,

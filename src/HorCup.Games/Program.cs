@@ -36,7 +36,7 @@ namespace HorCup.Games
 			{
 				var serviceProvider = containerBuilder.BuildServiceProvider();
 				var registrar = new RouteRegistrar(new Provider(serviceProvider));
-				registrar.RegisterInAssemblyOf(typeof(GameCommandHandler));
+				registrar.RegisterInAssemblyOf(typeof(GamesCommandHandler));
 				return serviceProvider;
 			}
 		}

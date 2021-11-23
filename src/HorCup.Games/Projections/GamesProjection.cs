@@ -15,8 +15,8 @@ namespace HorCup.Games.Projections
 		ICancellableEventHandler<GameCreated>,
 		ICancellableEventHandler<GameTitleSet>,
 		ICancellableEventHandler<GameDescriptionChanged>,
-		ICancellableQueryHandler<GetGameByIdQuery, GameDto>,
-		ICancellableEventHandler<GameDeleted>
+		ICancellableEventHandler<GameDeleted>,
+		ICancellableQueryHandler<GetGameByIdQuery, GameDto>
 	{
 		private readonly IMongoCollection<GameDto> _games;
 
@@ -42,7 +42,7 @@ namespace HorCup.Games.Projections
 			_games.UpdateOneAsync(Builders<GameDto>.Filter.Eq(g => g.Id, message.Id),
 				Builders<GameDto>.Update
 					.Set(g => g.Id, message.Id)
-					.Set(g => g.Title, message.Title), cancellationToken: token);
+					.Set(g => g.Title, message.Title + "Updated"), cancellationToken: token);
 
 		public Task<GameDto> Handle(GetGameByIdQuery message, CancellationToken token = new()) =>
 			_games.Find(Builders<GameDto>.Filter.Eq(g => g.Id, message.Id)).FirstOrDefaultAsync(token);

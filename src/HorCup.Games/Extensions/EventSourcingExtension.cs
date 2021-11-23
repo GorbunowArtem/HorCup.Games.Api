@@ -64,7 +64,7 @@ namespace HorCup.Games.Extensions
 
 			//Scan for commandhandlers and eventhandlers
 			services.Scan(scan => scan
-				.FromAssemblies(typeof(GameCommandHandler).GetTypeInfo().Assembly)
+				.FromAssemblies(typeof(GamesCommandHandler).GetTypeInfo().Assembly)
 				.AddClasses(classes => classes.Where(x =>
 				{
 					var allInterfaces = x.GetInterfaces();

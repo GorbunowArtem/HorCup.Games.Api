@@ -13,7 +13,7 @@ using Xunit;
 
 namespace HorCup.Games.Tests.Commands
 {
-	public class GameCommandHandlerTests : Specification<Game, GameCommandHandler, CreateGameCommand>
+	public class GameCommandHandlerTests : Specification<Game, GamesCommandHandler, CreateGameCommand>
 	{
 		[Fact]
 		public void ShouldRaiseTitleSetEvent()
@@ -54,7 +54,7 @@ namespace HorCup.Games.Tests.Commands
 				.With(c => c.Description, GamesFactory.Description)
 				.Create();
 
-		protected override GameCommandHandler BuildHandler() =>
+		protected override GamesCommandHandler BuildHandler() =>
 			new(Session);
 	}
 }

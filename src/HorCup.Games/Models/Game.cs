@@ -28,7 +28,6 @@ namespace HorCup.Games.Models
 			int minPlayers,
 			int maxPlayers)
 		{
-			Id = id;
 			ApplyChange(new GameCreated
 			{
 				Genre = genre,
@@ -73,6 +72,7 @@ namespace HorCup.Games.Models
 		private void Apply(GameCreated evt)
 		{
 			Genre = evt.Genre;
+			Id = evt.Id;
 			MaxPlayers = evt.MaxPlayers;
 			MinPlayers = evt.MinPlayers;
 		}

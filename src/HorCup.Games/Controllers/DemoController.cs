@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using CQRSlite.Commands;
 using HorCup.Games.Commands;
+using HorCup.Games.EventHandlers;
+using HorCup.Games.Events;
 using HorCup.Games.Services.Rebuild;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,11 +24,18 @@ namespace HorCup.Games.Controllers
 		}
 
 		[HttpPost]
-		[Route("rebuild")]
-		public IActionResult Execute()
+		[Route("send")]
+		public async Task<IActionResult> Execute()
 		{
-			_projectionRebuildService.Execute();
+			var c = new GamesEventHandler();
 
+			await c.Handle(new GameTitleSet
+			{
+				Id = Guid.NewGuid(),
+				Title = "From app",
+				Version = 1
+			});
+			
 			return Ok();
 		}
 

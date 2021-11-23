@@ -43,6 +43,8 @@ namespace HorCup.Games.EventStore
 					fromVersion + 1, int.MaxValue)
 				.SelectMany(e => e.Events)
 				.Select(e => e.Body)
-				.OfType<IEvent>());
+				.OfType<IEvent>()
+				.ToArray()
+				.AsEnumerable());
 	}
 }
